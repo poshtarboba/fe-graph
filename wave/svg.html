@@ -1,0 +1,152 @@
+<meta charset="utf-8">
+<style>
+	svg {
+		width: 600px;
+		height: 400px;
+		border: 1px solid silver;
+	}
+	line {
+		stroke: orange;
+		stroke-width: 2;
+	}
+	path {
+		stroke: rgba(255, 127, 0, 0.4);
+		stroke-width: 2;
+		fill: none;
+	}
+	#svg1a path {
+		transition: d 2s ease;
+	}
+	#svg1b path {
+		transition: d 200ms ease;
+	}
+</style>
+<body>
+
+<h3>Повільненько:</h3>
+<svg viewBox="0 0 600 400" class="single">
+	<line x1="0" y1="200" x2="50" y2="200" />
+	<line x1="550" y1="200" x2="600" y2="200" />
+	<path d="M 50,200 C 150,200 200,50 300,200 C 400,350 450,200 550,200">
+		<animate
+			attributeName="d"
+			dur="2000ms"
+			fill="freeze"
+			from="M 50,200 C 150,200 200,50  300,200 C 400,350 450,200 550,200"
+			  to="M 50,200 C 150,200 200,350 300,200 C 400,50  450,200 550,200"
+		/>
+	</path>
+</svg>
+
+<h3>Швиденько:</h3>
+<svg viewBox="0 0 600 400" class="single">
+	<line x1="0" y1="200" x2="50" y2="200" />
+	<line x1="550" y1="200" x2="600" y2="200" />
+	<path d="M 50,200 C 150,200 200,50 300,200 C 400,350 450,200 550,200">
+		<animate
+			attributeName="d"
+			dur="300ms"
+			fill="freeze"
+			from="M 50,200 C 150,200 200,50  300,200 C 400,350 450,200 550,200"
+			  to="M 50,200 C 150,200 200,350 300,200 C 400,50  450,200 550,200"
+		/>
+	</path>
+</svg>
+
+<h3>Багатенько:</h3>
+<svg viewBox="0 0 600 400" class="multiple">
+	<line x1="0" y1="200" x2="50" y2="200" />
+	<line x1="550" y1="200" x2="600" y2="200" />
+	<path data-dur="920" d="M 50,200
+				C 150,200 200,{50:350} 300,200
+				C 400,{350:50} 450,200 550,200" />
+	<path data-dur="870" d="M 50,200
+				C 116,200 150,{80:320} 216,200
+				C 282,{320:80} 316,{320:80} 382,200
+				C 448,{80:320} 484,200 550,200" />
+	<path data-dur="840" d="M 50,200
+				C 100,200 125,{104:296} 175,200
+				C 225,{296:104} 250,{296:104} 300,200
+				C 350,{104:296} 375,{104:296} 425,200
+				C 475,{296:104} 500,200 550,200" />
+	<path data-dur="795" d="M 50,200
+				C 90,200 110,{123:277} 150,200
+				C 190,{277:123} 210,{277:123} 250,200
+				C 290,{123:277} 310,{123:277} 350,200
+				C 390,{277:123} 410,{277:123} 450,200
+				C 490,{123:277} 510,200 550,200" />
+	<path data-dur="772" d="M 50,200
+				C 83,200 100,{139:239} 133,200
+				C 166,{239:139} 183,{239:139} 216,200
+				C 250,{139:239} 267,{139:239} 300,200
+				C 333,{239:139} 350,{239:139} 382,200
+				C 415,{139:239} 432,{139:239} 465,200
+				C 498,{239:139} 517,200 550,200" />
+	<path data-dur="734" d="M 50,200
+				C 78,200 93,{152:248} 121,200
+				C 150,{248:152} 164,{248:152} 192,200
+				C 220,{152:248} 235,{152:248} 263,200
+				C 290,{248:152} 306,{248:152} 334,200
+				C 306,{152:248} 362,{152:248} 405,200
+				C 433,{248:152} 448,{248:152} 476,200
+				C 504,{152:248} 522,200 550,200" />
+	<path data-dur="711" d="M 50,200
+				C 75,200 87,{161:239} 112,200
+				C 137,{239:161} 150,{239:161} 175,200
+				C 200,{161:239} 211,{161:239} 236,200
+				C 261,{239:161} 275,{239:161} 300,200
+				C 325,{161:239} 337,{161:239} 362,200
+				C 387,{239:161} 400,{239:161} 425,200
+				C 450,{161:239} 461,{161:239} 486,200
+				C 511,{239:161} 525,200 550,200" />
+	<path data-dur="660" d="M 50,200
+				C 72,200 83,{169:231} 105,200
+				C 127,{231:169} 138,{231:169} 160,200
+				C 182,{169:231} 194,{169:231} 216,200
+				C 238,{231:169} 250,{231:169} 271,200
+				C 293,{169:231} 304,{169:231} 326,200
+				C 348,{231:169} 360,{231:169} 382,200
+				C 404,{169:231} 415,{169:231} 437,200
+				C 460,{231:169} 470,{231:169} 492,200
+				C 514,{169:231} 528,200 550,200" />
+</svg>
+
+</body>
+<script>
+	// повільненько та швиденько:
+	document.querySelectorAll('.single animate').forEach(function (animate){
+		let time = parseInt(animate.getAttribute('dur'));
+		setInterval(repeat, time, animate);
+	});
+
+	// багатенько:
+	document.querySelectorAll('.multiple path').forEach(function (path){
+		let time = path.dataset.dur;
+		let d = path.getAttribute('d');
+		let from = parseD(d, 'from');
+		let to = parseD(d, 'to');
+		path.setAttribute('d', from);
+		path.innerHTML = `<animate attributeName="d" fill="freeze" dur="${time}ms" from="${from}" to="${to}" />`;
+		setInterval(repeat, time, path.firstElementChild);
+		function parseD(s, type){
+			let lt, sep, gt, val;
+			while ((lt = s.indexOf('{')) > -1) {
+				sep = s.indexOf(':');
+				gt = s.indexOf('}');
+				val = type === 'from' ? s.substring(lt + 1, sep) : s.substring(sep + 1, gt);
+				s = s.substring(0, lt) + val + s.substr(gt + 1);
+			}
+			return s;
+		}
+	});
+
+	// зациклити анімацію:
+	function repeat(animate) {
+		let from = animate.getAttribute('from');
+		let to = animate.getAttribute('to');
+		animate.setAttribute('from', to);
+		animate.setAttribute('to', from);
+		animate.beginElement();
+	}
+
+</script>
